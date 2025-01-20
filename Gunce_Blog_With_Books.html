@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Günce</title>
+    <style>
+        /* Genel stiller */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: #ffffff;
+        }
+
+        /* Başlık */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a1a4f; /* Lacivert */
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-style: italic;
+            font-size: 28px;
+            display: inline-block;
+        }
+        header h2 {
+            margin: 0;
+            font-style: italic;
+            font-size: 14px;
+            color: #e0e0e0;
+            display: block;
+        }
+
+        /* Sol kategori sütunu */
+        .sidebar {
+            width: 250px;
+            background-color: #f0f0f5;
+            padding: 20px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+            height: 100vh;
+            position: fixed;
+            top: 70px;
+            overflow-y: auto;
+        }
+        .sidebar h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #1a1a4f;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #1a1a4f;
+            font-size: 16px;
+            background-color: #e6e6f7;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar ul li a:hover {
+            background-color: #1a1a4f;
+            color: white;
+        }
+
+        /* Ana içerik alanı */
+        .content {
+            margin-left: 280px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .content h2 {
+            margin-top: 70px;
+            color: #1a1a4f;
+        }
+        .book-cover {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .book-cover img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #dcdcdc;
+            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .book-cover img:hover {
+            transform: scale(1.1);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        .book-cover p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #1a1a4f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Başlık -->
+    <header>
+        <h1>Günce</h1>
+        <h2>mehmetin güncesi..</h2>
+    </header>
+
+    <!-- Sol kategori sütunu -->
+    <div class="sidebar">
+        <h2>Kategoriler</h2>
+        <ul>
+            <li><a href="#kitaplar">Kitaplar</a></li>
+            <li><a href="#gunluk">Günlük</a></li>
+            <li><a href="#macerasever">Macerasever</a></li>
+            <li><a href="#videolar">YouTube Videoları</a></li>
+            <li><a href="#yorumlar">Yorumlar</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+    </div>
+
+    <!-- Ana içerik alanı -->
+    <div class="content">
+        <div id="kitaplar">
+            <h2>Kitaplar</h2>
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/150x200" alt="Kitap 1">
+                <p>Kitap 1</p>
+            </div>
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/150x200" alt="Kitap 2">
+                <p>Kitap 2</p>
+            </div>
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/150x200" alt="Kitap 3">
+                <p>Kitap 3</p>
+            </div>
+        </div>
+        <div id="gunluk">
+            <h2>Günlük</h2>
+            <p>Burada günlük yazılarınızı paylaşabilirsiniz.</p>
+        </div>
+        <div id="macerasever">
+            <h2>Macerasever</h2>
+            <p>Burada macera dolu hikayelerinizi paylaşabilirsiniz.</p>
+        </div>
+        <div id="videolar">
+            <h2>YouTube Videoları</h2>
+            <p>Favori videolarınızı buraya ekleyin.</p>
+        </div>
+        <div id="yorumlar">
+            <h2>Yorumlar</h2>
+            <p>Ziyaretçi yorumları burada görünecek.</p>
+        </div>
+        <div id="iletisim">
+            <h2>İletişim</h2>
+            <p>İletişim bilgilerinizi buraya ekleyebilirsiniz.</p>
+        </div>
+    </div>
+</body>
+</html>
