@@ -174,3 +174,146 @@
     </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Günce Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .book-cover {
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .book-cover img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Günce Blog</h1>
+  <div id="bookList">
+    <!-- Kitap kapakları burada görünecek -->
+  </div>
+
+  <!-- Modal (Popup) -->
+  <div id="overlay"></div>
+  <div id="modal">
+    <h2>Kitap Hakkında Yazı Ekle</h2>
+    <textarea id="bookContent" rows="5" cols="30" placeholder="Yazınızı buraya yazın..."></textarea>
+    <br />
+    <button id="saveContent">Kaydet</button>
+    <button id="closeModal">Kapat</button>
+  </div>
+
+  <script>
+    // Kitap listesi ve yazılar
+    const books = [
+      { id: 1, title: "Kitap 1", cover: "https://via.placeholder.com/150x200", content: "" },
+      { id: 2, title: "Kitap 2", cover: "https://via.placeholder.com/150x200", content: "" },
+      { id: 3, title: "Kitap 3", cover: "https://via.placeholder.com/150x200", content: "" },
+    ];
+
+    const bookList = document.getElementById("bookList");
+    const modal = document.getElementById("modal");
+    const overlay = document.getElementById("overlay");
+    const bookContent = document.getElementById("bookContent");
+    const saveContent = document.getElementById("saveContent");
+    const closeModal = document.getElementById("closeModal");
+
+    let currentBookId = null;
+
+    // Kitapları göster
+    function displayBooks() {
+      bookList.innerHTML = "";
+      books.forEach((book) => {
+        const bookDiv = document.createElement("div");
+        bookDiv.className = "book-cover";
+        bookDiv.innerHTML = `
+          <img src="${book.cover}" alt="${book.title}" />
+          <p>${book.title}</p>
+        `;
+        bookDiv.addEventListener("click", () => openModal(book.id));
+        bookList.appendChild(bookDiv);
+      });
+    }
+
+    // Modal aç
+    function openModal(bookId) {
+      currentBookId = bookId;
+      const book = books.find((b) => b.id === bookId);
+      bookContent.value = book.content || "";
+      modal.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    // Modal kapat
+    function closeModalFunction() {
+      modal.style.display = "none";
+      overlay.style.display = "none";
+    }
+
+    // İçeriği kaydet
+    saveContent.addEventListener("click", () => {
+      const book = books.find((b) => b.id === currentBookId);
+      book.content = bookContent.value;
+      saveToLocalStorage();
+      closeModalFunction();
+    });
+
+    // Local Storage'a kaydet
+    function saveToLocalStorage() {
+      localStorage.setItem("books", JSON.stringify(books));
+    }
+
+    // Local Storage'dan yükle
+    function loadFromLocalStorage() {
+      const savedBooks = JSON.parse(localStorage.getItem("books"));
+      if (savedBooks) {
+        savedBooks.forEach((savedBook, index) => {
+          books[index].content = savedBook.content;
+        });
+      }
+    }
+
+    // Modal kapatma işlemleri
+    closeModal.addEventListener("click", closeModalFunction);
+    overlay.addEventListener("click", closeModalFunction);
+
+    // Sayfa yüklendiğinde
+    loadFromLocalStorage();
+    displayBooks();
+  </script>
+</body>
+</html>
