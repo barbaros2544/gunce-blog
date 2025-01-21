@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Günce</title>
     <style>
-        /* Genel stiller */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
             background-color: #ffffff;
         }
-
-        /* Başlık */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #1a1a4f; /* Lacivert */
+            background-color: #1a1a4f;
             color: white;
             padding: 15px 20px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -39,8 +35,6 @@
             color: #e0e0e0;
             display: block;
         }
-
-        /* Sol kategori sütunu */
         .sidebar {
             width: 250px;
             background-color: #f0f0f5;
@@ -78,8 +72,6 @@
             background-color: #1a1a4f;
             color: white;
         }
-
-        /* Ana içerik alanı */
         .content {
             margin-left: 280px;
             padding: 20px;
@@ -112,16 +104,50 @@
             font-size: 14px;
             color: #1a1a4f;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .modal textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+        }
+        .modal button {
+            padding: 10px 20px;
+            background-color: #1a1a4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal button:hover {
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
-    <!-- Başlık -->
     <header>
         <h1>Günce</h1>
         <h2>mehmetin güncesi..</h2>
     </header>
 
-    <!-- Sol kategori sütunu -->
     <div class="sidebar">
         <h2>Kategoriler</h2>
         <ul>
@@ -134,186 +160,48 @@
         </ul>
     </div>
 
-    <!-- Ana içerik alanı -->
     <div class="content">
         <div id="kitaplar">
             <h2>Kitaplar</h2>
-            <div class="book-cover">
+            <div class="book-cover" onclick="openModal('Kitap 1')">
                 <img src="https://via.placeholder.com/150x200" alt="Kitap 1">
                 <p>Kitap 1</p>
             </div>
-            <div class="book-cover">
+            <div class="book-cover" onclick="openModal('Kitap 2')">
                 <img src="https://via.placeholder.com/150x200" alt="Kitap 2">
                 <p>Kitap 2</p>
             </div>
-            <div class="book-cover">
+            <div class="book-cover" onclick="openModal('Kitap 3')">
                 <img src="https://via.placeholder.com/150x200" alt="Kitap 3">
                 <p>Kitap 3</p>
             </div>
         </div>
-        <div id="gunluk">
-            <h2>Günlük</h2>
-            <p>Burada günlük yazılarınızı paylaşabilirsiniz.</p>
-        </div>
-        <div id="macerasever">
-            <h2>Macerasever</h2>
-            <p>Burada macera dolu hikayelerinizi paylaşabilirsiniz.</p>
-        </div>
-        <div id="videolar">
-            <h2>YouTube Videoları</h2>
-            <p>Favori videolarınızı buraya ekleyin.</p>
-        </div>
-        <div id="yorumlar">
-            <h2>Yorumlar</h2>
-            <p>Ziyaretçi yorumları burada görünecek.</p>
-        </div>
-        <div id="iletisim">
-            <h2>İletişim</h2>
-            <p>İletişim bilgilerinizi buraya ekleyebilirsiniz.</p>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <textarea id="modalTextarea" placeholder="Buraya yazı ekleyin..."></textarea>
+            <button onclick="saveContent()">Kaydet</button>
+            <button onclick="closeModal()">Kapat</button>
         </div>
     </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Günce Blog</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .book-cover {
-      display: inline-block;
-      margin: 10px;
-      cursor: pointer;
-    }
-    .book-cover img {
-      width: 150px;
-      height: 200px;
-      object-fit: cover;
-    }
-    #modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    button {
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Günce Blog</h1>
-  <div id="bookList">
-    <!-- Kitap kapakları burada görünecek -->
-  </div>
 
-  <!-- Modal (Popup) -->
-  <div id="overlay"></div>
-  <div id="modal">
-    <h2>Kitap Hakkında Yazı Ekle</h2>
-    <textarea id="bookContent" rows="5" cols="30" placeholder="Yazınızı buraya yazın..."></textarea>
-    <br />
-    <button id="saveContent">Kaydet</button>
-    <button id="closeModal">Kapat</button>
-  </div>
+    <script>
+        function openModal(bookTitle) {
+            document.getElementById('modalTitle').innerText = bookTitle;
+            document.getElementById('myModal').style.display = 'block';
+        }
 
-  <script>
-    // Kitap listesi ve yazılar
-    const books = [
-      { id: 1, title: "Kitap 1", cover: "https://via.placeholder.com/150x200", content: "" },
-      { id: 2, title: "Kitap 2", cover: "https://via.placeholder.com/150x200", content: "" },
-      { id: 3, title: "Kitap 3", cover: "https://via.placeholder.com/150x200", content: "" },
-    ];
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
 
-    const bookList = document.getElementById("bookList");
-    const modal = document.getElementById("modal");
-    const overlay = document.getElementById("overlay");
-    const bookContent = document.getElementById("bookContent");
-    const saveContent = document.getElementById("saveContent");
-    const closeModal = document.getElementById("closeModal");
-
-    let currentBookId = null;
-
-    // Kitapları göster
-    function displayBooks() {
-      bookList.innerHTML = "";
-      books.forEach((book) => {
-        const bookDiv = document.createElement("div");
-        bookDiv.className = "book-cover";
-        bookDiv.innerHTML = `
-          <img src="${book.cover}" alt="${book.title}" />
-          <p>${book.title}</p>
-        `;
-        bookDiv.addEventListener("click", () => openModal(book.id));
-        bookList.appendChild(bookDiv);
-      });
-    }
-
-    // Modal aç
-    function openModal(bookId) {
-      currentBookId = bookId;
-      const book = books.find((b) => b.id === bookId);
-      bookContent.value = book.content || "";
-      modal.style.display = "block";
-      overlay.style.display = "block";
-    }
-
-    // Modal kapat
-    function closeModalFunction() {
-      modal.style.display = "none";
-      overlay.style.display = "none";
-    }
-
-    // İçeriği kaydet
-    saveContent.addEventListener("click", () => {
-      const book = books.find((b) => b.id === currentBookId);
-      book.content = bookContent.value;
-      saveToLocalStorage();
-      closeModalFunction();
-    });
-
-    // Local Storage'a kaydet
-    function saveToLocalStorage() {
-      localStorage.setItem("books", JSON.stringify(books));
-    }
-
-    // Local Storage'dan yükle
-    function loadFromLocalStorage() {
-      const savedBooks = JSON.parse(localStorage.getItem("books"));
-      if (savedBooks) {
-        savedBooks.forEach((savedBook, index) => {
-          books[index].content = savedBook.content;
-        });
-      }
-    }
-
-    // Modal kapatma işlemleri
-    closeModal.addEventListener("click", closeModalFunction);
-    overlay.addEventListener("click", closeModalFunction);
-
-    // Sayfa yüklendiğinde
-    loadFromLocalStorage();
-    displayBooks();
-  </script>
+        function saveContent() {
+            const content = document.getElementById('modalTextarea').value;
+            alert(`Kaydedildi: ${content}`);
+            closeModal();
+        }
+    </script>
 </body>
 </html>
