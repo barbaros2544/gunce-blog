@@ -140,6 +140,9 @@
         .modal button:hover {
             background-color: #333;
         }
+        .modal input[type="file"] {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -152,11 +155,10 @@
         <h2>Kategoriler</h2>
         <ul>
             <li><a href="#kitaplar">Kitaplar</a></li>
-            <li><a href="#gunluk">Günlük</a></li>
             <li><a href="#macerasever">Macerasever</a></li>
             <li><a href="#videolar">YouTube Videoları</a></li>
-            <li><a href="#yorumlar">Yorumlar</a></li>
             <li><a href="#iletisim">İletişim</a></li>
+            <li><a href="#gunluk">Günlük</a></li>
         </ul>
     </div>
 
@@ -176,11 +178,44 @@
                 <p>Kitap 3</p>
             </div>
         </div>
+
+        <div id="macerasever">
+            <h2>Macerasever</h2>
+            <div>
+                <h3>Yüklediğiniz Videolar</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+                <textarea placeholder="Not ekleyin..."></textarea>
+            </div>
+            <div>
+                <h3>Gezi Rotaları</h3>
+                <form>
+                    <input type="text" placeholder="Google Haritalar Linki" style="width: 100%; margin-bottom: 10px;">
+                    <textarea placeholder="Rota Hakkında Notlar"></textarea>
+                </form>
+            </div>
+        </div>
+
+        <div id="iletisim">
+            <h2>İletişim</h2>
+            <form>
+                <label for="name">Adınız:</label><br>
+                <input type="text" id="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
+                <label for="message">Mesajınız:</label><br>
+                <textarea id="message" name="message" style="width: 100%; height: 100px;"></textarea><br>
+                <button type="submit">Gönder</button>
+            </form>
+        </div>
+
+        <div id="gunluk">
+            <h2>Günlük</h2>
+            <p>Burada günlük yazılarınızı paylaşabilirsiniz.</p>
+        </div>
     </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle"></h2>
+            <input type="file" id="modalFileInput" accept="image/*">
             <textarea id="modalTextarea" placeholder="Buraya yazı ekleyin..."></textarea>
             <button onclick="saveContent()">Kaydet</button>
             <button onclick="closeModal()">Kapat</button>
@@ -198,8 +233,19 @@
         }
 
         function saveContent() {
+            const fileInput = document.getElementById('modalFileInput');
             const content = document.getElementById('modalTextarea').value;
-            alert(`Kaydedildi: ${content}`);
+
+            if (fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    alert(`Resim ve Yazı Kaydedildi:\nYazı: ${content}\nResim: ${reader.result}`);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert(`Yazı Kaydedildi: ${content}`);
+            }
+
             closeModal();
         }
     </script>
