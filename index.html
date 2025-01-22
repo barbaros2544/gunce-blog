@@ -1,253 +1,263 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Günce</title>
+    <title>Kitaplar ve Kategoriler</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div id="container">
+        <aside id="sidebar">
+            <h2>Kategoriler</h2>
+            <ul>
+                <li><a href="#kitaplar">Kitaplar</a></li>
+                <li><a href="#macerasever">Macerasever</a></li>
+                <li><a href="#notlar">Kendime Notlar</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            </ul>
+        </aside>
+
+        <main id="main-content">
+            <!-- Kitaplar Bölümü -->
+            <section id="kitaplar">
+                <h2>Kitaplar</h2>
+                <div id="kitaplar-list">
+                    <div class="kitap">
+                        <div class="kapak"></div>
+                        <p>Kitap 1</p>
+                    </div>
+                    <div class="kitap">
+                        <div class="kapak"></div>
+                        <p>Kitap 2</p>
+                    </div>
+                    <div class="kitap">
+                        <div class="kapak"></div>
+                        <p>Kitap 3</p>
+                    </div>
+                    <!-- Artı simgesi -->
+                    <div class="kitap add-book">
+                        <div class="kapak">+</div>
+                        <p>Kitap Ekle</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Macerasever Bölümü -->
+            <section id="macerasever">
+                <h2>Macerasever</h2>
+                <div id="macerasever-list">
+                    <div class="video">
+                        <iframe src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+                        <textarea placeholder="Bu video hakkında not al..."></textarea>
+                    </div>
+                    <!-- Artı simgesi -->
+                    <div class="video add-video">
+                        <div class="kapak">+</div>
+                        <p>Video Ekle</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kendime Notlar Bölümü -->
+            <section id="notlar">
+                <h2>Kendime Notlar</h2>
+                <label for="bugun-notu">Bugün Ne Öğrendin?</label>
+                <textarea id="bugun-notu" placeholder="Bugünkü notlarınızı buraya yazabilirsiniz..."></textarea>
+                <label for="gidilmeli">Buraya gidilmeli:</label>
+                <input type="text" id="gidilmeli" placeholder="Google Harita Linki Ekleyin">
+            </section>
+
+            <!-- İletişim Bölümü -->
+            <section id="iletisim">
+                <h2>İletişim</h2>
+                <form id="iletisim-formu">
+                    <label for="isim">Adınız:</label>
+                    <input type="text" id="isim" placeholder="Adınızı yazın">
+
+                    <label for="mesaj">Mesajınız:</label>
+                    <textarea id="mesaj" placeholder="Mesajınızı yazın..."></textarea>
+
+                    <button type="submit">Gönder</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
     <style>
+        /* Genel Stiller */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            margin: 0;
             display: flex;
-            background-color: #ffffff;
         }
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        #container {
+            display: flex;
             width: 100%;
-            background-color: #1a1a4f;
-            color: white;
-            padding: 15px 20px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
         }
-        header h1 {
-            margin: 0;
-            font-style: italic;
-            font-size: 28px;
-            display: inline-block;
-        }
-        header h2 {
-            margin: 0;
-            font-style: italic;
-            font-size: 14px;
-            color: #e0e0e0;
-            display: block;
-        }
-        .sidebar {
-            width: 250px;
-            background-color: #f0f0f5;
+
+        aside#sidebar {
+            width: 20%;
+            background-color: #f4f4f4;
             padding: 20px;
-            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-            height: 100vh;
-            position: fixed;
-            top: 70px;
-            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
-        .sidebar h2 {
-            font-size: 18px;
-            margin-top: 0;
-            color: #1a1a4f;
-        }
-        .sidebar ul {
+
+        aside#sidebar ul {
             list-style: none;
             padding: 0;
         }
-        .sidebar ul li {
-            margin: 10px 0;
+
+        aside#sidebar ul li {
+            margin-bottom: 10px;
         }
-        .sidebar ul li a {
+
+        aside#sidebar ul li a {
             text-decoration: none;
-            color: #1a1a4f;
-            font-size: 16px;
-            background-color: #e6e6f7;
-            padding: 8px 12px;
-            border-radius: 5px;
-            display: block;
-            text-align: center;
-            transition: background-color 0.3s ease;
+            color: #333;
         }
-        .sidebar ul li a:hover {
-            background-color: #1a1a4f;
-            color: white;
-        }
-        .content {
-            margin-left: 280px;
+
+        #main-content {
+            flex: 1;
             padding: 20px;
-            flex-grow: 1;
         }
-        .content h2 {
-            margin-top: 70px;
-            color: #1a1a4f;
+
+        /* Kitaplar Bölümü */
+        #kitaplar-list {
+            display: flex;
+            gap: 20px;
         }
-        .book-cover {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-        }
-        .book-cover img {
+
+        .kitap {
             width: 150px;
             height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #dcdcdc;
-            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        .book-cover img:hover {
-            transform: scale(1.1);
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
+        .kitap .kapak {
+            width: 100px;
+            height: 150px;
+            background-color: #f4f4f4;
+            border: 1px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #aaa;
         }
-        .book-cover p {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #1a1a4f;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-        .modal textarea {
-            width: 100%;
-            height: 200px;
-            margin-bottom: 15px;
-        }
-        .modal button {
-            padding: 10px 20px;
-            background-color: #1a1a4f;
-            color: white;
-            border: none;
-            border-radius: 5px;
+
+        .kitap.add-book .kapak {
+            font-size: 36px;
+            color: #bbb;
             cursor: pointer;
         }
-        .modal button:hover {
-            background-color: #333;
+
+        .kitap.add-book:hover .kapak {
+            color: #666;
         }
-        .modal input[type="file"] {
-            margin-bottom: 15px;
+
+        /* Macerasever Bölümü */
+        #macerasever-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video textarea {
+            resize: none;
+            width: 100%;
+            height: 60px;
+        }
+
+        .video.add-video {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .video.add-video:hover {
+            color: #666;
+        }
+
+        /* Kendime Notlar */
+        #notlar textarea, #notlar input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* İletişim */
+        #iletisim-formu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #iletisim-formu input, #iletisim-formu textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #iletisim-formu button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #iletisim-formu button:hover {
+            background-color: #0056b3;
         }
     </style>
-</head>
-<body>
-    <header>
-        <h1>Günce</h1>
-        <h2>mehmetin güncesi..</h2>
-    </header>
-
-    <div class="sidebar">
-        <h2>Kategoriler</h2>
-        <ul>
-            <li><a href="#kitaplar">Kitaplar</a></li>
-            <li><a href="#macerasever">Macerasever</a></li>
-            <li><a href="#videolar">YouTube Videoları</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-            <li><a href="#gunluk">Günlük</a></li>
-        </ul>
-    </div>
-
-    <div class="content">
-        <div id="kitaplar">
-            <h2>Kitaplar</h2>
-            <div class="book-cover" onclick="openModal('Kitap 1')">
-                <img src="https://via.placeholder.com/150x200" alt="Kitap 1">
-                <p>Kitap 1</p>
-            </div>
-            <div class="book-cover" onclick="openModal('Kitap 2')">
-                <img src="https://via.placeholder.com/150x200" alt="Kitap 2">
-                <p>Kitap 2</p>
-            </div>
-            <div class="book-cover" onclick="openModal('Kitap 3')">
-                <img src="https://via.placeholder.com/150x200" alt="Kitap 3">
-                <p>Kitap 3</p>
-            </div>
-        </div>
-
-        <div id="macerasever">
-            <h2>Macerasever</h2>
-            <div>
-                <h3>Yüklediğiniz Videolar</h3>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
-                <textarea placeholder="Not ekleyin..."></textarea>
-            </div>
-            <div>
-                <h3>Gezi Rotaları</h3>
-                <form>
-                    <input type="text" placeholder="Google Haritalar Linki" style="width: 100%; margin-bottom: 10px;">
-                    <textarea placeholder="Rota Hakkında Notlar"></textarea>
-                </form>
-            </div>
-        </div>
-
-        <div id="iletisim">
-            <h2>İletişim</h2>
-            <form>
-                <label for="name">Adınız:</label><br>
-                <input type="text" id="name" name="name" style="width: 100%; margin-bottom: 10px;"><br>
-                <label for="message">Mesajınız:</label><br>
-                <textarea id="message" name="message" style="width: 100%; height: 100px;"></textarea><br>
-                <button type="submit">Gönder</button>
-            </form>
-        </div>
-
-        <div id="gunluk">
-            <h2>Günlük</h2>
-            <p>Burada günlük yazılarınızı paylaşabilirsiniz.</p>
-        </div>
-    </div>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <h2 id="modalTitle"></h2>
-            <input type="file" id="modalFileInput" accept="image/*">
-            <textarea id="modalTextarea" placeholder="Buraya yazı ekleyin..."></textarea>
-            <button onclick="saveContent()">Kaydet</button>
-            <button onclick="closeModal()">Kapat</button>
-        </div>
-    </div>
 
     <script>
-        function openModal(bookTitle) {
-            document.getElementById('modalTitle').innerText = bookTitle;
-            document.getElementById('myModal').style.display = 'block';
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Kitap ekleme
+            const kitaplarDiv = document.getElementById("kitaplar-list");
+            const addBookButton = document.querySelector(".kitap.add-book");
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
+            addBookButton.addEventListener("click", function () {
+                const newBook = document.createElement("div");
+                newBook.classList.add("kitap");
+                newBook.innerHTML = `
+                    <div class="kapak"></div>
+                    <p>Yeni Kitap</p>
+                `;
+                kitaplarDiv.insertBefore(newBook, addBookButton);
+            });
 
-        function saveContent() {
-            const fileInput = document.getElementById('modalFileInput');
-            const content = document.getElementById('modalTextarea').value;
+            // Video ekleme
+            const maceraseverDiv = document.getElementById("macerasever-list");
+            const addVideoButton = document.querySelector(".video.add-video");
 
-            if (fileInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    alert(`Resim ve Yazı Kaydedildi:\nYazı: ${content}\nResim: ${reader.result}`);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert(`Yazı Kaydedildi: ${content}`);
-            }
-
-            closeModal();
-        }
+            addVideoButton.addEventListener("click", function () {
+                const newVideo = document.createElement("div");
+                newVideo.classList.add("video");
+                newVideo.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+                    <textarea placeholder="Bu video hakkında not al..."></textarea>
+                `;
+                maceraseverDiv.insertBefore(newVideo, addVideoButton);
+            });
+        });
     </script>
 </body>
 </html>
