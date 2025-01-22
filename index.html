@@ -140,9 +140,6 @@
         .modal button:hover {
             background-color: #333;
         }
-        .modal input[type="file"] {
-            margin-bottom: 15px;
-        }
     </style>
 </head>
 <body>
@@ -215,7 +212,6 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle"></h2>
-            <input type="file" id="modalFileInput" accept="image/*">
             <textarea id="modalTextarea" placeholder="Buraya yazı ekleyin..."></textarea>
             <button onclick="saveContent()">Kaydet</button>
             <button onclick="closeModal()">Kapat</button>
@@ -233,19 +229,8 @@
         }
 
         function saveContent() {
-            const fileInput = document.getElementById('modalFileInput');
             const content = document.getElementById('modalTextarea').value;
-
-            if (fileInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    alert(`Resim ve Yazı Kaydedildi:\nYazı: ${content}\nResim: ${reader.result}`);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert(`Yazı Kaydedildi: ${content}`);
-            }
-
+            alert(`Kaydedildi: ${content}`);
             closeModal();
         }
     </script>
